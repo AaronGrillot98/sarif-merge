@@ -38,7 +38,10 @@ jobs:
         run: bandit -r src -ll -ii
 
       - name: pip-audit
-        run: pip-audit --strict
+        # --skip-editable so pip-audit ignores the editable install of
+        # sarif-merge itself (which isn't on PyPI). The project has no
+        # runtime third-party deps; this scan covers test/dev deps.
+        run: pip-audit --strict --skip-editable
 
   dogfood:
     name: Dogfood — merge sarif-merge's own scanner output
