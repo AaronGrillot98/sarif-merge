@@ -1,0 +1,5 @@
+# Dev / CI dependencies, pinned to compatible-release ranges.
+# pip-audit scans this file, not the editable install of sarif-merge itself.
+pytest~=8.0
+pip-audit~=2.7
+bandit~=1.7
