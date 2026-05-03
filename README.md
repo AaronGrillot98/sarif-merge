@@ -153,6 +153,14 @@ Compliant with [SARIF v2.1.0](https://docs.oasis-open.org/sarif/sarif/v2.1.0/sar
 
 ---
 
+## Deployed live in [TalonEdge](https://github.com/AaronGrillot98/TalonEdge-Secure-Deploy)
+
+`sarif-merge` is wired into TalonEdge's Security CI as a `merge` job that runs after Bandit, gitleaks, tfsec, and Trivy. It downloads each scanner's SARIF artifact, runs the merge, and posts a single deduplicated comment to the PR — replacing five separate tabs with one prioritized list.
+
+[![Live PR comment posted by sarif-merge in TalonEdge](docs/screenshots/06-live-pr-comment.png)](docs/screenshots/06-live-pr-comment.png)
+
+In the screenshot above: 13 unique findings consolidated across 2 reporting scanners, sorted by severity × cross-scanner confidence, with a stable comment marker so re-runs update the same comment rather than stacking.
+
 ## Pairs with
 
 This tool is the natural follow-on to a fail-closed Security CI like the one in [TalonEdge-Secure-Deploy](https://github.com/AaronGrillot98/TalonEdge-Secure-Deploy), which runs Bandit + pip-audit + gitleaks + tfsec + Trivy independently. Drop `sarif-merge` after those scanners and the noise compresses to a single PR comment.
