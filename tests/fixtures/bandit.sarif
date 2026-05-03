@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Bandit",
+          "version": "1.7.5",
+          "rules": [
+            {
+              "id": "B602",
+              "name": "subprocess_popen_with_shell_equals_true",
+              "shortDescription": { "text": "subprocess call with shell=True identified, security issue." },
+              "defaultConfiguration": { "level": "error" },
+              "properties": { "cwe": "CWE-78" }
+            },
+            {
+              "id": "B105",
+              "name": "hardcoded_password_string",
+              "shortDescription": { "text": "Possible hardcoded password" },
+              "defaultConfiguration": { "level": "warning" }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "B602",
+          "level": "error",
+          "message": { "text": "subprocess call with shell=True identified" },
+          "locations": [{
+            "physicalLocation": {
+              "artifactLocation": { "uri": "src/talonedge/cli.py" },
+              "region": { "startLine": 42, "startColumn": 5 }
+            }
+          }],
+          "properties": { "issue_severity": "HIGH", "issue_confidence": "HIGH" }
+        },
+        {
+          "ruleId": "B105",
+          "level": "warning",
+          "message": { "text": "Possible hardcoded password: 'secret'" },
+          "locations": [{
+            "physicalLocation": {
+              "artifactLocation": { "uri": "src/talonedge/policy.py" },
+              "region": { "startLine": 7 }
+            }
+          }],
+          "properties": { "issue_severity": "MEDIUM" }
+        }
+      ]
+    }
+  ]
+}

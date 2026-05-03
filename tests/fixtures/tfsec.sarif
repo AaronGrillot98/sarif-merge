@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "tfsec",
+          "version": "1.28.4",
+          "rules": [
+            {
+              "id": "AVD-AWS-0011",
+              "name": "no-cloudfront-waf",
+              "shortDescription": { "text": "CloudFront distribution should have a WAF" },
+              "properties": { "severity": "HIGH" }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "AVD-AWS-0011",
+          "level": "error",
+          "message": { "text": "CloudFront distribution should have a WAF in front of it" },
+          "locations": [{
+            "physicalLocation": {
+              "artifactLocation": { "uri": "infra/aws/main.tf" },
+              "region": { "startLine": 122 }
+            }
+          }]
+        }
+      ]
+    }
+  ]
+}

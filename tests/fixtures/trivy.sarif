@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Trivy",
+          "version": "0.50.0",
+          "rules": [
+            {
+              "id": "AVD-AWS-0011",
+              "name": "no-waf-enabled",
+              "shortDescription": { "text": "Distribution does not utilize a WAF." },
+              "defaultConfiguration": { "level": "error" },
+              "properties": { "security-severity": "7.5", "tags": ["aws", "cloudfront"] }
+            },
+            {
+              "id": "CVE-2026-99999",
+              "name": "openssl-cve",
+              "shortDescription": { "text": "OpenSSL high-severity CVE" },
+              "properties": { "security-severity": "9.5" }
+            },
+            {
+              "id": "TRIVY-PYTHON-CWE-78",
+              "name": "shell-injection",
+              "shortDescription": { "text": "Possible shell injection via subprocess" },
+              "properties": { "security-severity": "8.0", "cwe": "CWE-78" },
+              "relationships": [{
+                "target": { "id": "78", "toolComponent": { "name": "CWE" } }
+              }]
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "AVD-AWS-0011",
+          "level": "error",
+          "message": { "text": "Distribution does not utilize a WAF." },
+          "locations": [{
+            "physicalLocation": {
+              "artifactLocation": { "uri": "infra/aws/main.tf" },
+              "region": { "startLine": 121 }
+            }
+          }]
+        },
+        {
+          "ruleId": "CVE-2026-99999",
+          "level": "error",
+          "message": { "text": "OpenSSL has a high-severity CVE." },
+          "locations": [{
+            "physicalLocation": {
+              "artifactLocation": { "uri": "Dockerfile" },
+              "region": { "startLine": 1 }
+            }
+          }]
+        },
+        {
+          "ruleId": "TRIVY-PYTHON-CWE-78",
+          "level": "error",
+          "message": { "text": "Possible shell injection in subprocess call" },
+          "locations": [{
+            "physicalLocation": {
+              "artifactLocation": { "uri": "src/talonedge/cli.py" },
+              "region": { "startLine": 42 }
+            }
+          }]
+        }
+      ]
+    }
+  ]
+}
