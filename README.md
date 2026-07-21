@@ -36,6 +36,30 @@ pip install -e .
 pip install git+https://github.com/AaronGrillot98/sarif-merge
 ```
 
+## Docker
+```bash
+git clone https://github.com/AaronGrillot98/sarif-merge
+cd sarif-merge
+
+docker build --pull -t sarif-merge .
+docker run --rm -v <path_to_reports_dir>:/reports -v <path_to_output_dir>:/output sarif-merge <params>
+```
+
+### Example
+```bash
+docker run --rm -v ./reports:/reports -v ./output:/output sarif-merge ./reports/* --output ./output/output.md --markdown ./output/summary.md
+```
+```bash
+./output
+├── output.md
+└── summary.md
+./reports
+├── codeql-python-community.sarif
+├── codeql-python.sarif
+├── deepsecrets.sarif
+└── trivy.sarif
+```
+
 ## Use
 
 ```bash
